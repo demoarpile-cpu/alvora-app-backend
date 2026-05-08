@@ -38,6 +38,8 @@ const app = express();
 const allowedOrigins = [
   "http://localhost:5173",
   "https://alvora.softwaredemolive.live",
+  "http://alvore.softwaredemolive.live",
+  "https://alvore.softwaredemolive.live"
 ];
 
 /* =========================================
