@@ -3,6 +3,28 @@ const asyncHandler = require('express-async-handler');
 const Permission = require("../Models/PermissionModel");
 const mongoose = require('mongoose');
 
+const PERMISSION_TEMPLATE = [
+    { sidebarId: "683d7168bcb71900b5cb2141", subSidebar: null, isEdit: true, isDelete: true, isCreate: true, isGet: true, permission: true },
+    { sidebarId: "683d7168bcb71900b5cb2142", subSidebar: null, isEdit: true, isDelete: true, isCreate: true, isGet: true, permission: true },
+    { sidebarId: "683d7168bcb71900b5cb2143", subSidebar: "VehicleType", isEdit: true, isDelete: true, isCreate: true, isGet: true, permission: true },
+    { sidebarId: "683d7168bcb71900b5cb2143", subSidebar: "vehicleDivision", isEdit: true, isDelete: true, isCreate: true, isGet: true, permission: true },
+    { sidebarId: "683d7168bcb71900b5cb2143", subSidebar: "Insurance", isEdit: true, isDelete: true, isCreate: true, isGet: true, permission: true },
+    { sidebarId: "683d7168bcb71900b5cb2143", subSidebar: "vehicle", isEdit: true, isDelete: true, isCreate: true, isGet: true, permission: true },
+    { sidebarId: "683d7168bcb71900b5cb2144", subSidebar: "Position", isEdit: true, isDelete: true, isCreate: true, isGet: true, permission: true },
+    { sidebarId: "683d7168bcb71900b5cb2144", subSidebar: "Department", isEdit: true, isDelete: true, isCreate: true, isGet: true, permission: true },
+    { sidebarId: "683d7168bcb71900b5cb2144", subSidebar: "Driver", isEdit: true, isDelete: true, isCreate: true, isGet: true, permission: true },
+    { sidebarId: "683d7168bcb71900b5cb2144", subSidebar: "DriverList", isEdit: true, isDelete: true, isCreate: true, isGet: true, permission: true },
+    { sidebarId: "683d7168bcb71900b5cb2145", subSidebar: null, isEdit: true, isDelete: true, isCreate: true, isGet: true, permission: true },
+    { sidebarId: "683d7168bcb71900b5cb2146", subSidebar: "CreateChecklist", isEdit: true, isDelete: true, isCreate: true, isGet: true, permission: true },
+    { sidebarId: "683d7168bcb71900b5cb2146", subSidebar: "Checklist", isEdit: true, isDelete: true, isCreate: true, isGet: true, permission: true },
+    { sidebarId: "683d7168bcb71900b5cb2146", subSidebar: "FilledChecklist", isEdit: true, isDelete: true, isCreate: true, isGet: true, permission: true },
+    { sidebarId: "683d7168bcb71900b5cb2147", subSidebar: "BranchChecklist", isEdit: true, isDelete: true, isCreate: true, isGet: true, permission: true },
+    { sidebarId: "683d7168bcb71900b5cb2147", subSidebar: "RouteChecklist", isEdit: true, isDelete: true, isCreate: true, isGet: true, permission: true },
+    { sidebarId: "683d7168bcb71900b5cb2147", subSidebar: "EconomicunitChecklist", isEdit: true, isDelete: true, isCreate: true, isGet: true, permission: true },
+    { sidebarId: "683d7168bcb71900b5cb2147", subSidebar: "AnswerChecklist", isEdit: true, isDelete: true, isCreate: true, isGet: true, permission: true },
+    { sidebarId: "683d7168bcb71900b5cb2148", subSidebar: null, isEdit: true, isDelete: true, isCreate: true, isGet: true, permission: true },
+];
+
 // GET all roles
 const getRoleWithPermissions = asyncHandler(async (req, res) => {
     try {
@@ -28,29 +50,7 @@ const createRole = asyncHandler(async (req, res) => {
 
         const roles = await Schema.create({ roleName, description });
 
-        const permissionTemplate = [
-            { sidebarId: "683d7168bcb71900b5cb2141", subSidebar: null, isEdit: true, isDelete: true, isCreate: true, isGet: true, permission: true },
-            { sidebarId: "683d7168bcb71900b5cb2142", subSidebar: null, isEdit: true, isDelete: true, isCreate: true, isGet: true, permission: true },
-            { sidebarId: "683d7168bcb71900b5cb2143", subSidebar: "VehicleType", isEdit: true, isDelete: true, isCreate: true, isGet: true, permission: true },
-            { sidebarId: "683d7168bcb71900b5cb2143", subSidebar: "vehicleDivision", isEdit: true, isDelete: true, isCreate: true, isGet: true, permission: true },
-            { sidebarId: "683d7168bcb71900b5cb2143", subSidebar: "Insurance", isEdit: true, isDelete: true, isCreate: true, isGet: true, permission: true },
-            { sidebarId: "683d7168bcb71900b5cb2143", subSidebar: "vehicle", isEdit: true, isDelete: true, isCreate: true, isGet: true, permission: true },
-            { sidebarId: "683d7168bcb71900b5cb2144", subSidebar: "Position", isEdit: true, isDelete: true, isCreate: true, isGet: true, permission: true },
-            { sidebarId: "683d7168bcb71900b5cb2144", subSidebar: "Department", isEdit: true, isDelete: true, isCreate: true, isGet: true, permission: true },
-            { sidebarId: "683d7168bcb71900b5cb2144", subSidebar: "Driver", isEdit: true, isDelete: true, isCreate: true, isGet: true, permission: true },
-            { sidebarId: "683d7168bcb71900b5cb2144", subSidebar: "DriverList", isEdit: true, isDelete: true, isCreate: true, isGet: true, permission: true },
-            { sidebarId: "683d7168bcb71900b5cb2145", subSidebar: null, isEdit: true, isDelete: true, isCreate: true, isGet: true, permission: true },
-            { sidebarId: "683d7168bcb71900b5cb2146", subSidebar: "CreateChecklist", isEdit: true, isDelete: true, isCreate: true, isGet: true, permission: true },
-            { sidebarId: "683d7168bcb71900b5cb2146", subSidebar: "Checklist", isEdit: true, isDelete: true, isCreate: true, isGet: true, permission: true },
-            { sidebarId: "683d7168bcb71900b5cb2146", subSidebar: "FilledChecklist", isEdit: true, isDelete: true, isCreate: true, isGet: true, permission: true },
-            { sidebarId: "683d7168bcb71900b5cb2147", subSidebar: "BranchChecklist", isEdit: true, isDelete: true, isCreate: true, isGet: true, permission: true },
-            { sidebarId: "683d7168bcb71900b5cb2147", subSidebar: "RouteChecklist", isEdit: true, isDelete: true, isCreate: true, isGet: true, permission: true },
-            { sidebarId: "683d7168bcb71900b5cb2147", subSidebar: "EconomicunitChecklist", isEdit: true, isDelete: true, isCreate: true, isGet: true, permission: true },
-            { sidebarId: "683d7168bcb71900b5cb2147", subSidebar: "AnswerChecklist", isEdit: true, isDelete: true, isCreate: true, isGet: true, permission: true },
-            { sidebarId: "683d7168bcb71900b5cb2148", subSidebar: null, isEdit: true, isDelete: true, isCreate: true, isGet: true, permission: true },
-        ];
-
-        const permission = permissionTemplate.map(p => ({ ...p, roleId: roles._id }));
+        const permission = PERMISSION_TEMPLATE.map(p => ({ ...p, roleId: roles._id }));
         const RolePermission = await Permission.insertMany(permission, { ordered: true });
 
         res.status(200).json({ roles, message: "Role created successfully", success: true, RolePermission });
@@ -98,12 +98,22 @@ const getPermissionByRoleId = asyncHandler(async (req, res) => {
         const { roleId } = req.params;
         if (!roleId) return res.status(400).json({ message: "Role ID is required" });
 
-        const permissions = await Permission.find({ roleId })
+        let permissions = await Permission.find({ roleId })
             .populate({ path: 'sidebarId', select: 'sidebarName' });
+
+        // Logic: If a role doesn't have default permissions, seed them automatically so user doesn't see a blank modal
+        if (permissions.length === 0) {
+            const permissionsToInsert = PERMISSION_TEMPLATE.map(p => ({ ...p, roleId }));
+            await Permission.insertMany(permissionsToInsert, { ordered: true });
+            
+            // Re-fetch the fully seeded & populated permissions
+            permissions = await Permission.find({ roleId })
+                .populate({ path: 'sidebarId', select: 'sidebarName' });
+        }
 
         const formattedPermissions = permissions.map(p => ({
             _id: p._id,
-            sidebarName: p.sidebarId.sidebarName,
+            sidebarName: p.sidebarId ? p.sidebarId.sidebarName : 'Other', // Added safe null-check
             subSidebar: p.subSidebar,
             isEdit: p.isEdit,
             isDelete: p.isDelete,
